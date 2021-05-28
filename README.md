@@ -3,7 +3,7 @@
 Ressources utiles:
 Create React apps with no build configuration.
 
-    [Creating an App](https://github.com/facebook/create-react-app#creating-an-app) – How to create a new app.
+    [Creating an App](https://github.com/facebook/create-react-app) – How to create a new app.
     [User Guide](https://create-react-app.dev/docs/getting-started/) – How to develop apps bootstrapped with Create React App.
 
 Create React App works on macOS, Windows, and Linux.
