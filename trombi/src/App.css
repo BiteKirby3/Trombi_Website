@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+.photo_trombi {
+  width: 108px;
+  height: 108px;
+  object-fit: cover;
+}

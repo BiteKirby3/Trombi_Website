@@ -37,19 +37,19 @@ class Person extends React.Component {
         console.log(isLoaded);
 
         if (!isLoaded) {
-            return <div className="App">Loading...</div>;
+            return <div className="App">Chargement...</div>;
         }
 
         else {
             return(
                 <div className="App">
-                    <h1>Data has been loaded</h1>
+                    <h1>Trombi GI</h1>
                     <ul>
                         {items.map(item => (
                             <li key={item.id}>
-                                 Name : {item.nomp} | Email : {item.mail}
+                                 Name : {item.nomp} | Email : {item.mail} | <img className="photo_trombi" src={`data:image/jpg;base64,${item.photo}`} alt={`Photo de ${item.nomp}`}/>
                             </li>
-                        ))};
+                        ))}
                     </ul>
 
                 </div>
