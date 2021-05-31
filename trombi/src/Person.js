@@ -1,5 +1,7 @@
 import './App.css';
 import React from 'react';
+import QRCode from "./QRCode";
+
 
 class Person extends React.Component {
     constructor(props) {
@@ -47,7 +49,7 @@ class Person extends React.Component {
                     <ul>
                         {items.map(item => (
                             <li key={item.id}>
-                                 Name : {item.nomp} | Email : {item.mail} | <img className="photo_trombi" src={`data:image/jpg;base64,${item.photo}`} alt={`Photo de ${item.nomp}`}/>
+                                Email QrCode: <QRCode dataFromPerson = {item.mail} /> Tele QrCode: <QRCode dataFromPerson = {item.telPoste1} /> | Name : {item.nomp} | Email : {item.mail} | Tel :  {item.telPoste1} |<img className="photo_trombi" src={`data:image/jpg;base64,${item.photo}`} alt={`Photo de ${item.nomp}`}/>
                             </li>
                         ))}
                     </ul>
@@ -56,7 +58,7 @@ class Person extends React.Component {
             );
         }
 
-    }
+    }  
 }
 
 export default Person;
