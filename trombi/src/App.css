@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'DIN';
+  src: local('DIN'), url(./fonts/DINRegular.ttf) format('truetype');
+}
+
+body {
+  font-family: DIN, "Times New Roman";
+}
+
+
+h1 {
+  font-size: xxx-large;
+  text-align: center;
+  color: #009fe3;
+}
+
 .App {
   text-align: center;
 }
@@ -41,4 +57,38 @@
   width: 108px;
   height: 108px;
   object-fit: cover;
+  border:3px solid black;
+}
+
+.logo {
+  max-width: 200px;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 50px;
+}
+
+.Person {
+  text-align: center;
+}
+
+ul.no-bullets {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-container > div {
+  background-color: #f1f1f1;
+  margin: 10px;
+  text-align: center;
+  line-height: 75px;
+  font-size: small;
+  flex : 1 1 300px;
 }

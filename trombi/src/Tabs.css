@@ -1,0 +1,78 @@
+*, ::before, ::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #fff;
+}
+
+.containerTabs {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 800px;
+    height: 300px;
+    background: #fff;
+    margin: 100px auto 0;
+    word-break: break-all;
+    border: 1px solid #fff;
+}
+
+.bloc-tabs {
+    display: flex;
+}
+.tabs {
+    padding: 15px;
+    text-align: center;
+    color : #f7f7f7;
+    width: 50%;
+    background: navy ;
+    cursor: pointer;
+    border-bottom: 1px solid navy;
+    box-sizing: content-box;
+    position: relative;
+    outline: none;
+}
+.tabs:not(:last-child){
+    border-right: 1px solid navy;
+
+}
+
+.active-tabs  {
+    color : navy;
+    background: #d9d9d9;
+    border-bottom: 1px solid transparent;
+}
+
+.active-tabs::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% + 2px);
+    height: 5px;
+    background: navy;
+}
+
+button {
+    border: none;
+}
+
+.content-tabs {
+    flex-grow : 1;
+}
+.content {
+    background: #f7f7f7;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.active-content {
+    display: block;
+}

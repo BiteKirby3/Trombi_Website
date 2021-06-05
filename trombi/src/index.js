@@ -3,6 +3,18 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Person from "./Person";
+import Header from "./Header";
+import SimpleTabs from "./Tabs2";
+
+ReactDOM.render(
+    <Header/>,
+    document.getElementById('header')
+);
+
+ReactDOM.render(
+    <SimpleTabs/>,
+    document.getElementById('root2')
+);
 
 ReactDOM.render(
   <React.StrictMode>

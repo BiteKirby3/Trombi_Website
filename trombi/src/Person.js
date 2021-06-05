@@ -1,6 +1,13 @@
 import './App.css';
 import React from 'react';
+import QRCode from "./QRCode";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
+const link="https://webservices.utc.fr/api/v1/trombi/gi";
+
+function rendered_header() {
+    return "Hello World";
+}
 class Person extends React.Component {
     constructor(props) {
         super(props);
@@ -8,7 +15,8 @@ class Person extends React.Component {
             isLoaded:false,
             items:[],
         }
-        this.componentDidMount("https://webservices.utc.fr/api/v1/trombi/gi");
+        //Renvoie par défaut l'ensemble du trombinoscope
+        this.componentDidMount(link);
     }
 
     componentDidMount(link) {
@@ -32,25 +40,38 @@ class Person extends React.Component {
     }
 
     render() {
-
         var { isLoaded, items } = this.state;
         console.log(isLoaded);
 
         if (!isLoaded) {
-            return <div className="App">Chargement...</div>;
+            return <div className="App">Chargement...<CircularProgress/></div>;
         }
 
         else {
             return(
-                <div className="App">
-                    <h1>Trombi GI</h1>
-                    <ul>
+                <div className="Person">
+                    <div className="flex-container">
                         {items.map(item => (
+                            <div>
+                            <ul className="no-bullets">
                             <li key={item.id}>
-                                 Name : {item.nomp} | Email : {item.mail} | <img className="photo_trombi" src={`data:image/jpg;base64,${item.photo}`} alt={`Photo de ${item.nomp}`}/>
+                                {
+                                    (
+                                        item.photo &&
+                                        <img className="photo_trombi" src={`data:image/jpg;base64,${item.photo}`}/>
+                                    ) ||
+                                    <img className="photo_trombi" src={process.env.PUBLIC_URL + "/user_black_logo.png"} alt="mypic"/>
+                                }
+                                <h3>{item.nomp}</h3>
+                                Email : <QRCode dataFromPerson = {item.mail} /> {item.mail}
+                                <br></br>Telephone : <QRCode dataFromPerson = {item.telPoste1} /> Poste : (034423){item.telPoste1}
+                                <br></br>Fonction : {item.fonction}
+                                <br></br>Laboratoire : {item.structLibelleFils}
                             </li>
+                            </ul>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
 
                 </div>
             );
