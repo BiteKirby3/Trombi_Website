@@ -57,7 +57,9 @@ h1 {
   width: 108px;
   height: 108px;
   object-fit: cover;
-  border:3px solid black;
+  border: solid black 3px;
+  margin-top : 10%;
+  margin-bottom: -10%;
 }
 
 .logo {
@@ -66,11 +68,11 @@ h1 {
   display: block;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 50px;
+  padding-top: 1.5%;
 }
 
 .Person {
-  text-align: center;
+  text-align: left;
 }
 
 ul.no-bullets {
@@ -85,10 +87,24 @@ ul.no-bullets {
 }
 
 .flex-container > div {
-  background-color: #f1f1f1;
+  background-color: lightgrey;
   margin: 10px;
   text-align: center;
   line-height: 75px;
   font-size: small;
-  flex : 1 1 300px;
+  flex : 1 1 20%;
+}
+
+.icon_email {
+  max-width: 8%;
+  height: auto;
+  margin-right: 5%;
+  margin-bottom: -2%;
+}
+
+.icon_phone {
+  max-width: 5%;
+  height: auto;
+  margin-right: 5%;
+  margin-bottom: -2%;
 }

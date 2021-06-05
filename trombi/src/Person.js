@@ -1,13 +1,9 @@
 import './App.css';
 import React from 'react';
-import QRCode from "./QRCode";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 const link="https://webservices.utc.fr/api/v1/trombi/gi";
 
-function rendered_header() {
-    return "Hello World";
-}
 class Person extends React.Component {
     constructor(props) {
         super(props);
@@ -18,7 +14,8 @@ class Person extends React.Component {
         //Renvoie par défaut l'ensemble du trombinoscope
         this.componentDidMount(link);
     }
-
+    //Email : <QRCode dataFromPerson = {item.mail} />
+    //<QRCode dataFromPerson = {item.telPoste1} />
     componentDidMount(link) {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Basic d3N1c2VyOnYzS2Vub2JpIQ==");
@@ -58,15 +55,20 @@ class Person extends React.Component {
                                 {
                                     (
                                         item.photo &&
-                                        <img className="photo_trombi" src={`data:image/jpg;base64,${item.photo}`}/>
+                                        <img className="photo_trombi" src={`data:image/jpg;base64,${item.photo}`} alt="mypic"/>
                                     ) ||
                                     <img className="photo_trombi" src={process.env.PUBLIC_URL + "/user_black_logo.png"} alt="mypic"/>
                                 }
                                 <h3>{item.nomp}</h3>
-                                Email : <QRCode dataFromPerson = {item.mail} /> {item.mail}
-                                <br></br>Telephone : <QRCode dataFromPerson = {item.telPoste1} /> Poste : (034423){item.telPoste1}
-                                <br></br>Fonction : {item.fonction}
-                                <br></br>Laboratoire : {item.structLibelleFils}
+                                <img className="icon_email" src={process.env.PUBLIC_URL + "/email.png"} alt="mypic"/> {item.mail}
+                                <br></br>
+                                <img className="icon_phone" src={process.env.PUBLIC_URL + "/phone.png"} alt="mypic"/>
+                                {
+                                    (
+                                        item.telPoste1 && <div>{item.telPoste1}</div>
+                                    ) || <div>Pas de poste</div>
+                                }
+                                Fonction : {item.fonction}
                             </li>
                             </ul>
                             </div>
