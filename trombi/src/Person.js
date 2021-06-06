@@ -1,8 +1,10 @@
 import './App.css';
+import './tooltip.css';
 import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import QRCode from "./QRCode";
 
-const link="https://webservices.utc.fr/api/v1/trombi/gi";
+const link="https://webservices.utc.fr/api/v1/trombi/gi?name=ab";
 
 class Person extends React.Component {
     constructor(props) {
@@ -14,8 +16,6 @@ class Person extends React.Component {
         //Renvoie par défaut l'ensemble du trombinoscope
         this.componentDidMount(link);
     }
-    //Email : <QRCode dataFromPerson = {item.mail} />
-    //<QRCode dataFromPerson = {item.telPoste1} />
     componentDidMount(link) {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Basic d3N1c2VyOnYzS2Vub2JpIQ==");
@@ -34,6 +34,22 @@ class Person extends React.Component {
                     items:json,
                 })
             });
+    }
+
+    show_tooltip(id) {
+        console.log("show_tooltip : "+id);
+        var elem=document.getElementById(id);
+        elem.style.visibility="visible";
+        return;
+
+    }
+
+    hide_tooltip(id) {
+        console.log("show_tooltip : "+id);
+        var elem=document.getElementById(id);
+        elem.style.visibility="hidden";
+        return;
+
     }
 
     render() {
@@ -55,18 +71,19 @@ class Person extends React.Component {
                                 {
                                     (
                                         item.photo &&
-                                        <img className="photo_trombi" src={`data:image/jpg;base64,${item.photo}`} alt="mypic"/>
+                                        <div className="tooltip"><img className="photo_trombi" src={`data:image/jpg;base64,${item.photo}`} alt="Fetched pic" onClick={()=>this.show_tooltip(item.mail)}/>
+                                            <span className="tooltiptext" id={item.mail} onClick={()=>this.hide_tooltip(item.mail)}>{item.mail} <QRCode dataFromPerson = {item.mail} /></span>
+                                        </div>
                                     ) ||
-                                    <img className="photo_trombi" src={process.env.PUBLIC_URL + "/user_black_logo.png"} alt="mypic"/>
+                                    <img className="photo_trombi" src={process.env.PUBLIC_URL + "/user_black_logo.png"} alt="No pic available"/>
                                 }
                                 <h3>{item.nomp}</h3>
-                                <img className="icon_email" src={process.env.PUBLIC_URL + "/email.png"} alt="mypic"/> {item.mail}
+                                <img className="icon_email" src={process.env.PUBLIC_URL + "/email.png"} alt="Email icon"/> {item.mail} <QRCode dataFromPerson = {item.mail} />
                                 <br></br>
-                                <img className="icon_phone" src={process.env.PUBLIC_URL + "/phone.png"} alt="mypic"/>
                                 {
                                     (
-                                        item.telPoste1 && <div>{item.telPoste1}</div>
-                                    ) || <div>Pas de poste</div>
+                                        item.telPoste1 && <div><img className="icon_phone" src={process.env.PUBLIC_URL + "/phone.png"} alt="Phone icon"/>{item.telPoste1} <QRCode dataFromPerson = {item.telPoste1} /></div>
+                                    ) || <div><img className="icon_phone" src={process.env.PUBLIC_URL + "/no_phone.png"} alt="No Phone"/> <div className="QRCode"><img width='150px' height='auto' src={process.env.PUBLIC_URL + "/shim.png"} alt="No Phone QRCode"/></div></div>
                                 }
                                 Fonction : {item.fonction}
                             </li>

@@ -58,8 +58,8 @@ h1 {
   height: 108px;
   object-fit: cover;
   border: solid black 3px;
-  margin-top : 10%;
-  margin-bottom: -10%;
+  margin-top : 10px;
+  margin-bottom: 10px;
 }
 
 .logo {
@@ -90,21 +90,26 @@ ul.no-bullets {
   background-color: lightgrey;
   margin: 10px;
   text-align: center;
-  line-height: 75px;
+  line-height: 25px;
   font-size: small;
-  flex : 1 1 20%;
+  flex : 1 1 250px;
 }
 
 .icon_email {
-  max-width: 8%;
+  max-width: 25px;
   height: auto;
-  margin-right: 5%;
-  margin-bottom: -2%;
+  margin-right: 10px;
+  margin-bottom: -8px;
 }
 
 .icon_phone {
-  max-width: 5%;
+  max-width: 20px;
   height: auto;
-  margin-right: 5%;
-  margin-bottom: -2%;
+  margin-right: 10px;
+  margin-bottom: -8px;
+}
+
+.QRCode {
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
