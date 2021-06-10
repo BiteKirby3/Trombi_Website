@@ -6,8 +6,7 @@ import QRCode from "./QRCode";
 import PropTypes from "prop-types";
 import filtrerPersonnes from "./FiltrerPersonnes";
 
-const link="https://webservices.utc.fr/api/v1/trombi/gi";
-//<div key={'div_4_' + item.id} className="QRCode"><img width='150px'
+let endurl="gi";
 //                                                                                                           height='auto'
 //                                                                                                           src={process.env.PUBLIC_URL + "/shim.png"}
 //                                                                                                           alt="No Phone QRCode"/>
@@ -27,6 +26,7 @@ export default class Person extends React.Component {
         this.state = {
             isLoaded:false,
             items: [],
+            link:"https://webservices.utc.fr/api/v1/trombi/"+endurl,
         }
     }
 
@@ -55,7 +55,7 @@ export default class Person extends React.Component {
             redirect: 'follow'
         };
 
-        fetch(link, requestOptions)
+        fetch(this.state.link, requestOptions)
             .then(response => response.json())
             .then(json => {
                 for (var i=0 ; i<json.length ; i++)

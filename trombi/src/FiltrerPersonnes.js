@@ -34,7 +34,6 @@ export default function filtrerPersonnes(items, searchName, searchFirstname, sea
             return true;}
     });*/
     let listeFiltree=items;
-    let i = 0;
     let filters= [/*{
             property: 'name',
             value: 'dori'

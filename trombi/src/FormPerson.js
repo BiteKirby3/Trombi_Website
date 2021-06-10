@@ -157,8 +157,8 @@ export default class FormPerson extends React.Component{
                             onChange={this.handleChange}
                         >
                             <option value="empty"></option>
-                            <option value="heuristique et diagnostic">Heudiasyc</option>
-                            <option value="laboratoire de math">LMAC</option>
+                            <option value="heuristique">Heudiasyc</option>
+                            <option value="math">LMAC</option>
                         </select>
                     </div>
                 </div>

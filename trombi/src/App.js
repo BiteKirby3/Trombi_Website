@@ -1,9 +1,8 @@
 import './App.css';
-import React, { PureComponent } from "react";
+import React from "react";
 import Person from "./Person";
 import Header from "./Header";
 import SimpleTabs from "./SimpleTabs";
-import filtrerPersonnes from "./FiltrerPersonnes";
 import FormPerson from "./FormPerson";
 
 export default class App extends React.Component {
@@ -15,6 +14,7 @@ export default class App extends React.Component {
             firstname:'',
             job:'',
             struct: '',
+            link: 'https://webservices.utc.fr/api/v1/trombi/gi',
             sortby: 'nomAz',
         };
     }
@@ -28,6 +28,7 @@ export default class App extends React.Component {
             firstname: state.firstname,
             job: state.job,
             struct: state.struct,
+            link: state.link,
             sortby: state.sortby,
         });
     };
@@ -37,7 +38,7 @@ export default class App extends React.Component {
             <div>
                 <Header />
                 <FormPerson formChange={this.handleSearchChange} />
-                <Person name={this.state.name} firstname={this.state.firstname} job={this.state.job} struct={this.state.struct} sortby={this.state.sortby}/>
+                <Person name={this.state.name} firstname={this.state.firstname} job={this.state.job} link={this.state.link} struct={this.state.struct} sortby={this.state.sortby}/>
             </div>
         );
     }
