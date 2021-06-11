@@ -90,7 +90,7 @@ class CustomizedDialogs extends Component {
 
     var imgData;
 
-    if (this.props.dataFromPerson==null) {
+    /*if (this.props.dataFromPerson==null) {
       var imgData = QR.drawImg(this.props.dataFromPerson, {
         typeNumber: 4,
         errorCorrectLevel: 'M',
@@ -108,7 +108,8 @@ class CustomizedDialogs extends Component {
         errorCorrectLevel: 'M',
         size: 300
       })      
-    }
+    }*/
+    imgData='https://api.qrserver.com/v1/create-qr-code/?data='+this.props.dataFromPerson;
 
     return (
       <div>

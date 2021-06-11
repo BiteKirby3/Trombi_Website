@@ -156,9 +156,9 @@ export default class FormPerson extends React.Component{
                             value={this.state.struct}
                             onChange={this.handleChange}
                         >
-                            <option value="empty"></option>
-                            <option value="heuristique">Heudiasyc</option>
-                            <option value="math">LMAC</option>
+                            <option value="gi">Tous</option>
+                            <option value="hds">Heudiasyc</option>
+                            <option value="lmac">LMAC</option>
                         </select>
                     </div>
                 </div>
