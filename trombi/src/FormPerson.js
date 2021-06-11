@@ -1,7 +1,7 @@
 import React from "react";
-import "./Form.css"
-import filtrerPersonnes from "./FiltrerPersonnes";
+import "./Form.css";
 import PropTypes from "prop-types";
+import "./Tabs.css";
 
 export default class FormPerson extends React.Component{
 

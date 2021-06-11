@@ -5,6 +5,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import QRCode from "./QRCode";
 import PropTypes from "prop-types";
 import filtrerPersonnes from "./FiltrerPersonnes";
+import CustomizedDialogs from "./CustomizedDialogs";
 
 let endurl="gi";
 //                                                                                                           height='auto'
@@ -90,7 +91,7 @@ export default class Person extends React.Component {
             let listeFiltree = filtrerPersonnes(items, searchName, searchFirstname, searchJob, searchStruct, searchSortby);
 
             if (listeFiltree.length === 0) {
-                console.log("Person.render() : " + "Litefiltree est vide");
+                console.log("Person.render() : " + "Listefiltree est vide");
                 // on retourne pas de résultat
                 return (
                     <div className="no-result">
@@ -99,6 +100,7 @@ export default class Person extends React.Component {
             } else {
                 // on retourne la liste
                 return (
+
                     <div className="Person">
                         <ul className="no-bullets">
                             <div className="flex-container">
@@ -121,18 +123,12 @@ export default class Person extends React.Component {
                                                      alt="No pic available"/>
                                             }
                                             <h3>{item.nomp}</h3>
-                                            <img className="icon_email" src={process.env.PUBLIC_URL + "/email.png"}
-                                                 alt="Email icon"/> {item.mail}
+                                            <img className="icon_email" src={process.env.PUBLIC_URL + "/email.png"} alt="Email icon"/>
+                                            <CustomizedDialogs dataFromPerson = {item.mail}></CustomizedDialogs>
                                             {
                                                 (
-                                                    item.telPoste1 && <div><img className="icon_phone"
-                                                                                src={process.env.PUBLIC_URL + "/phone.png"}
-                                                                                alt="Phone icon"/>{item.telPoste1}</div>
-                                                ) || <div key={'div_3_' + item.id}>
-                                                    <img className="icon_phone"
-                                                         src={process.env.PUBLIC_URL + "/no_phone.png"} alt="No Phone"/>
-
-                                                </div>
+                                                    item.telPoste1 && <div><img className="icon_phone" src={process.env.PUBLIC_URL + "/phone.png"} alt="Phone icon"/><CustomizedDialogs dataFromPerson = {item.telPoste1}></CustomizedDialogs></div>
+                                                ) || <div><img className="icon_phone" src={process.env.PUBLIC_URL + "/no_phone.png"} alt="No Phone"/></div>
                                             }
                                             Fonction : {item.fonction}<br></br>
                                             Structure : {item.structLibelleFils}

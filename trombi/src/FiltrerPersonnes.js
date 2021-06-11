@@ -34,13 +34,7 @@ export default function filtrerPersonnes(items, searchName, searchFirstname, sea
             return true;}
     });*/
     let listeFiltree=items;
-    let filters= [/*{
-            property: 'name',
-            value: 'dori'
-        }, {
-            property: 'company',
-            value: 'a'
-        }*/]
+    let filters= [];
     if (searchName !== '') {
         filters.push({property:"nomAz",value:searchName});
     }
