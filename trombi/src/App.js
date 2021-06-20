@@ -2,8 +2,7 @@ import './App.css';
 import React from "react";
 import PersonList from "./PersonList";
 import Header from "./Header";
-import SimpleTabs from "./SimpleTabs";
-import FormPerson from "./FormPerson";
+import Form from "./Form";
 
 export default class App extends React.Component {
 
@@ -12,20 +11,21 @@ export default class App extends React.Component {
         this.state = {
             name: '',
             firstname:'',
-            job:'',
+            jobs: new Set(['E','C','I','A']),
             struct: 'gi',
             sortby: 'nomAz',
+            listOfPersons: [],
         };
     }
 
     handleSearchChange = (Formstate) => {
 
-        console.log ("app.js->handleSearchChange(), this.state=" + Formstate.name + "/" + Formstate.firstname + "/" + Formstate.job);
+        console.log ("app.js handleSearchChange(), this.state=" + Formstate.name + "/" + Formstate.firstname + "/" + Formstate.jobs + "/" + Formstate.struct);
 
         this.setState({
             name: Formstate.name,
             firstname: Formstate.firstname,
-            job: Formstate.job,
+            jobs: Formstate.jobs,
             struct: Formstate.struct,
             sortby: Formstate.sortby,
         });
@@ -35,9 +35,10 @@ export default class App extends React.Component {
         return (
             <div>
                 <Header />
-                <FormPerson formChange={this.handleSearchChange} />
-                <PersonList name={this.state.name} firstname={this.state.firstname} job={this.state.job} struct={this.state.struct} sortby={this.state.sortby}/>
+                <Form formChange={this.handleSearchChange} />
+                <PersonList name={this.state.name} firstname={this.state.firstname} jobs={this.state.jobs} struct={this.state.struct} sortby={this.state.sortby}/>
             </div>
         );
     }
 }
+

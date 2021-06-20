@@ -1,11 +1,10 @@
 import './PersonList.css';
-import './tooltip.css';
+import './QRTooltip.css';
 import React from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import PropTypes from "prop-types";
 import filtrerPersonnes from "./FiltrerPersonnes";
 import PersonCard from "./PersonCard";
-
 
 function createLink(endurl) {
     return "https://webservices.utc.fr/api/v1/trombi/" + endurl;
@@ -13,11 +12,12 @@ function createLink(endurl) {
 
 export default class PersonList extends React.Component {
 
-
     static propTypes = {
         name: PropTypes.string,
         firstname: PropTypes.string,
-        job: PropTypes.string,
+        jobs: PropTypes.object,
+        struct: PropTypes.string,
+        sortby: PropTypes.string,
     };
 
     constructor(props) {
@@ -29,31 +29,39 @@ export default class PersonList extends React.Component {
         }
     }
 
-    show_tooltip(id) {
-        console.log("show_tooltip : " + id);
-        var elem = document.getElementById(id);
-        elem.style.visibility = "visible";
-    }
-
+    /**
+     * Exécuté 1 fois après le montage du composant
+     */
     componentDidMount() {
-        this.setState({link: createLink(this.props.struct)})
+        this.setState({
+            link: createLink(this.props.struct),
+            isLoaded: false,
+        })
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState, snapshot) {
 
         // on va chercher toutes les personnes, on les stocke dans la propriété items
 
-        var myHeaders = new Headers();
+        console.log("PersonList.componentDidUpdate state.isLoaded  = " + this.state.isLoaded);
+        console.log("PersonList.componentDidUpdate props.name      = " + this.props.name);
+        console.log("PersonList.componentDidUpdate props.firstName = " + this.props.firstname);
+        console.log("PersonList.componentDidUpdate props.jobs      = " + this.props.jobs);
+        console.log("PersonList.componentDidUpdate props.struct    = " + this.props.struct);
+        console.log("PersonList.componentDidUpdate props.sortby    = " + this.props.sortby);
+
+        let myHeaders = new Headers();
         myHeaders.append("Authorization", "Basic d3N1c2VyOnYzS2Vub2JpIQ==");
 
-        var requestOptions = {
+        let requestOptions = {
             method: 'GET',
             headers: myHeaders,
             redirect: 'follow'
         };
+
         let url = createLink(this.props.struct);
-        console.log("isLoaded = " + this.state.isLoaded);
-        console.log("URL : " + url);
+        console.log("PersonList.componentDidUpdate url            = " + url);
+
         fetch(createLink(this.props.struct), requestOptions)
             .then(response => response.json())
             .then(json => {
@@ -71,22 +79,26 @@ export default class PersonList extends React.Component {
 
         let {isLoaded, items} = this.state;
 
-        if (!isLoaded) {
+        if ( (!isLoaded) ) {
             // on retourne chargement en cours
             return <div className="App">Chargement...<CircularProgress/></div>;
         } else {
             // on filtre la liste en fonction des propriétés reçues
-            let searchName = this.props.name.toLocaleLowerCase();
-            let searchFirstname = this.props.firstname.toLowerCase();
-            let searchJob = this.props.job.toLowerCase();
-            let searchSortby = this.props.sortby;
+            console.log("PersonList.render() : "
+                + this.props.name.toLocaleLowerCase() + ","
+                + this.props.firstname.toLowerCase() + ","
+                + this.props.jobs + ","
+                + this.props.struct + ","
+                + this.props.sortby + ")");
 
-            console.log("PersonList.render() : " + searchName + "," + searchFirstname + "," + searchJob + ")");
-
-            let listeFiltree = filtrerPersonnes(items, searchName, searchFirstname, searchJob, searchSortby);
+            let listeFiltree = filtrerPersonnes(items,
+                this.props.name.toLocaleLowerCase(),
+                this.props.firstname.toLowerCase(),
+                this.props.jobs,
+                this.props.sortby);
 
             if (listeFiltree.length === 0) {
-                console.log("PersonList.render() : " + "Listefiltree est vide");
+                // console.log("PersonList.render() : Listefiltree est vide");
                 // on retourne pas de résultat
                 return (
                     <div className="no-result">
@@ -95,7 +107,6 @@ export default class PersonList extends React.Component {
             } else {
                 // on retourne la liste
                 return (
-
                     <div className="Person">
                         <ul className="no-bullets">
                             <div className="flex-container">
@@ -103,11 +114,9 @@ export default class PersonList extends React.Component {
                                     <div key={'div_1_' + item.id}>
                                         <PersonCard item={item}></PersonCard>
                                     </div>
-
                                 ))}
                             </div>
                         </ul>
-
                     </div>
                 );
             }

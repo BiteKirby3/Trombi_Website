@@ -1,13 +1,14 @@
-// cette fonction filtre les personnes
+/**
+ *
+ * fonctions qui filtrent et trient les personnes
+ *
+ */
 
-// version test --> personnesList.json contient le json de toutes les personnes de GI
-
-// import listePersonnes from "./personnesList.json";
 import {createFilter} from './Filter';
 import {createSorter} from './Sort';
 
-export default function filtrerPersonnes(items, searchName, searchFirstname, searchJob, searchSortby) {
-    console.log("filtrerPersonnes(" + searchName + "," + searchFirstname + "," + searchJob + "," + searchSortby + ")");
+export default function filtrerPersonnes(items, searchName, searchFirstname, searchJobs, searchSortby) {
+    console.log("filtrerPersonnes(searchName:" + searchName + ",searchFirstname:" + searchFirstname + ",searchJobs:" + searchJobs + ",searchSortby" + searchSortby + ")");
     let listeFiltree = items;
     let filters = [];
     if (searchName !== '') {
@@ -16,11 +17,30 @@ export default function filtrerPersonnes(items, searchName, searchFirstname, sea
     if (searchFirstname !== '') {
         filters.push({property: "prenomAz", value: searchFirstname});
     }
-    if (searchJob !== '') {
-        filters.push({property: "fonction", value: searchJob});
+
+    console.log("FiltrerPersonnes:typeof(searchJobs)=" + typeof searchJobs);
+
+    if (searchJobs === null ) {
+        console.log ("filtrerPersonnes - searchJobs est null");
     }
-    console.log(filters);
-    console.log(filters.length);
+    if (searchJobs !== null && searchJobs.length !== 0) {
+        let jobRegExp="";
+        if (searchJobs.has("E")) {
+            jobRegExp += "[Ee][Cc]|[Ee]nseignant|[Pp]rofesseur|[Mm]a[iî]tre|[Cc]onf[eé]rence";
+        }
+        if (searchJobs.has("C")) {
+            if (jobRegExp !== '') { jobRegExp += '|';}
+            jobRegExp += "[Ee][Cc]|[Cc]hercheur|[Dd]octorant";
+        }
+        if (searchJobs.has("I")) {
+            if (jobRegExp !== '') { jobRegExp += '|';}
+            jobRegExp += "[Ii]ng[eé]nieur";
+        }
+        console.log("FiltrerPersonnes:jobRegExp="+jobRegExp);
+        filters.push({property: "fonction", value: jobRegExp});
+    }
+    console.log("FiltrerPersonnes:filters=" + filters);
+
     if (Array.isArray(filters) && filters.length) {
         listeFiltree = items.filter(createFilter(...filters));
     }

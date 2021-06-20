@@ -1,8 +1,8 @@
 import './PersonList.css';
-import './tooltip.css';
+import './QRTooltip.css';
 import React from 'react';
 import PropTypes from "prop-types";
-import CustomizedDialogs from "./CustomizedDialogs";
+import QRTooltip from "./QRTooltip";
 
 export default class PersonCard extends React.Component {
 
@@ -16,16 +16,25 @@ export default class PersonCard extends React.Component {
         this.state = {}
     }
 
+    show_tooltip(id) {
+        console.log("show_tooltip : " + id);
+        document.getElementById(id).style.visibility = "visible";
+    }
+
+    hide_tooltip(id) {
+        console.log("show_tooltip : " + id);
+        document.getElementById(id).style.visibility = "hidden";
+    }
+
     render() {
         return (
             <li key={'li' + this.props.item.id}>
                 {
                     (
                         this.props.item.photo &&
-                        <div key={'div_2_' + this.props.item.id} className="tooltip"><img
+                        <div key={'div_2_' + this.props.item.id}><img
                             className="photo_trombi"
-                            src={`data:image/jpg;base64,${this.props.item.photo}`} alt="Fetched pic"
-                            onClick={() => this.show_tooltip(this.props.item.mail)}/>
+                            src={`data:image/jpg;base64,${this.props.item.photo}`} alt="Fetched pic"/>
                         </div>
                     ) ||
                     <img className="photo_trombi"
@@ -34,13 +43,13 @@ export default class PersonCard extends React.Component {
                 }
                 <h3>{this.props.item.nomp}</h3>
                 <img className="icon_email" src={process.env.PUBLIC_URL + "/email.png"} alt="Email icon"/>
-                <CustomizedDialogs dataFromPerson={this.props.item.mail}></CustomizedDialogs>
+                <QRTooltip value={this.props.item.mail} itemId={'QRmail' + this.props.item.id}></QRTooltip>
                 {
                     (
                         this.props.item.telPoste1 &&
                         <div><img className="icon_phone" src={process.env.PUBLIC_URL + "/phone.png"} alt="Phone icon"/>
-                            <CustomizedDialogs
-                                dataFromPerson={'034423' + this.props.item.telPoste1}></CustomizedDialogs></div>
+                            <QRTooltip value={'034423' + this.props.item.telPoste1} itemId={'QRphone' + this.props.item.id}></QRTooltip>
+                        </div>
                     ) ||
                     <div><img className="icon_phone" src={process.env.PUBLIC_URL + "/no_phone.png"} alt="No Phone"/>
                     </div>
