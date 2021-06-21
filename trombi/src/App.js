@@ -21,6 +21,7 @@ export default class App extends React.Component {
             sortby: 'nomAz',
             listOfPersons: [],
             isLoaded: false,
+            err_msg: '',
         };
     }
 
@@ -49,7 +50,13 @@ export default class App extends React.Component {
         myLog("PersonList.componentDidUpdate url            = " + url);
 
         fetch(url, requestOptions)
-            .then(response => response.json())
+            .then(response => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw(response);
+                }
+            })
             .then(json => {
                 for (var i = 0; i < json.length; i++) {
                     json[i].id = i;
@@ -57,6 +64,14 @@ export default class App extends React.Component {
                 this.setState({
                     listOfPersons: json,
                     isLoaded: true
+                })
+            })
+            .catch(error => {
+                myLog("Impossible de récupérer les données du trombinoscope !")
+                this.setState( {
+                    listOfPersons: [],
+                    isLoaded:true,
+                    err_msg:'Impossible de récupérer les données du trombinoscope !',
                 })
             });
     }
@@ -91,7 +106,7 @@ export default class App extends React.Component {
             <div>
                 <Header/>
                 <Form formChange={this.handleSearchChange}/>
-                <PersonList isLoaded={this.state.isLoaded} listOfPersons={this.state.listOfPersons}
+                <PersonList isLoaded={this.state.isLoaded} listOfPersons={this.state.listOfPersons} err_msg={this.state.err_msg}
                             name={this.state.name} firstname={this.state.firstname} jobs={this.state.jobs}
                             struct={this.state.struct} sortby={this.state.sortby}/>
             </div>

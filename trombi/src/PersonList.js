@@ -1,7 +1,6 @@
 import './PersonList.css';
 import './QRTooltip.css';
 import React from 'react';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import PropTypes from "prop-types";
 import filtrerPersonnes from "./FiltrerPersonnes";
 import PersonCard from "./PersonCard";
@@ -17,6 +16,7 @@ export default class PersonList extends React.Component {
         sortby: PropTypes.string,
         items: PropTypes.array,
         isLoaded: PropTypes.bool,
+        err_msg: PropTypes.string,
     };
 
     constructor(props) {
@@ -30,8 +30,9 @@ export default class PersonList extends React.Component {
         let items = this.props.listOfPersons;
 
 
-        if (! this.props.isLoaded) {
-            return <div className="App">Chargement...<CircularProgress/></div>;
+        if (!this.props.isLoaded) {
+            return <div className="App"><img src={process.env.PUBLIC_URL + "loading.gif"} alt="Chargement..."></img>
+            </div>;
         } else {
             // on filtre la liste en fonction des propriétés reçues
             myLog("PersonList.render() : "
@@ -52,9 +53,23 @@ export default class PersonList extends React.Component {
                 // on retourne pas de résultat
                 return (
                     <div className="no-result">
-                        Aucun résultat
+                        {
+                            (
+                                this.props.err_msg &&
+                                <div>
+                                    {this.props.err_msg}
+                                </div>
+                            ) ||
+                            <div>
+                                Aucun résultat
+                            </div>
+
+                        }
+
                     </div>);
-            } else {
+            }
+        else
+            {
                 // on retourne la liste
                 return (
                     <div className="Person">
@@ -71,9 +86,9 @@ export default class PersonList extends React.Component {
                 );
             }
         }
-    }
+        }
 
-}
+        }
 
 
 
