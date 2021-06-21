@@ -26,13 +26,16 @@ export default class PersonCard extends React.Component {
         myLog("show_tooltip : " + id);
         document.getElementById(id).style.visibility = "hidden";
     }
-
     render() {
+        let diff_photo=false; //booléen pour savoir si on diffuse la photo de la personne
+        if (this.props.item.photo && this.props.item.trombiDiffuserPhoto$f==='O') { //on vérifie l'existence de la photo + l'autorisation de diffusion
+            diff_photo=true;
+        }
         return (
             <li key={'li' + this.props.item.id}>
                 {
                     (
-                        this.props.item.photo &&
+                        diff_photo &&
                         <div key={'div_2_' + this.props.item.id}><img
                             className="photo_trombi"
                             src={`data:image/jpg;base64,${this.props.item.photo}`} alt="Fetched pic"/>
