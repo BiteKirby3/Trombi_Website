@@ -1,6 +1,8 @@
 .formCustom{
     background-color: rgb(0,158,224);
     border-radius : 15px;
+    margin-bottom: 50px;
+    margin-top: 50px;
 }
 
 .divLabelCustom{

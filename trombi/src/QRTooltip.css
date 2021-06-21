@@ -8,6 +8,12 @@
     margin-bottom: 0px;
     margin-left: auto;
     margin-right: auto;
+    text-decoration: underline;
+    color: #009fe3;
+}
+
+.QRtooltip:hover {
+    color:#ee732c;
 }
 
 .QRtooltip .tooltiptext {
@@ -24,6 +30,7 @@
     right : 42%;
     opacity: 1;
 }
+
 
 /*.tooltip:active .tooltiptext {
     visibility: visible;
