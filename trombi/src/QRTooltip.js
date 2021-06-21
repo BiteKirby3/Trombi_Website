@@ -2,6 +2,7 @@ import './PersonList.css';
 import './QRTooltip.css';
 import React from 'react';
 import PropTypes from "prop-types";
+import myLog from "./MyLogger";
 
 export default class QRTooltip extends React.Component {
 
@@ -15,12 +16,12 @@ export default class QRTooltip extends React.Component {
     }
 
     show_tooltip(id) {
-        console.log ("show_tooltip(" + id + ")");
+        myLog ("show_tooltip(" + id + ")");
         document.getElementById(id).style.visibility = "visible";
     }
 
     hide_tooltip(id) {
-        console.log ("hide_tooltip(" + id + ")");
+        myLog ("hide_tooltip(" + id + ")");
         document.getElementById(id).style.visibility = "hidden";
     }
 
