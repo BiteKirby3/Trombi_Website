@@ -7,6 +7,11 @@
   margin-bottom: 10px;
 }
 
+.button_email {
+  margin-top : 6px;
+  margin-bottom: 6px;
+}
+
 .logo {
   max-width: 200px;
   height: auto;

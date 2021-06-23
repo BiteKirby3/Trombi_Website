@@ -3,6 +3,7 @@ import './QRTooltip.css';
 import React from 'react';
 import PropTypes from "prop-types";
 import QRTooltip from "./QRTooltip";
+import Dialog from "./Dialog"
 import myLog from "./MyLogger";
 
 export default class PersonCard extends React.Component {
@@ -46,13 +47,16 @@ export default class PersonCard extends React.Component {
                          alt="No pic available"/>
                 }
                 <h3>{this.props.item.nomp}</h3>
-                <img className="icon_email" src={process.env.PUBLIC_URL + "/email.png"} alt="Email icon"/>
-                <QRTooltip value={this.props.item.mail} itemId={'QRmail' + this.props.item.id}></QRTooltip>
+                <div className="button_email" >
+                    <img className="icon_email" src={process.env.PUBLIC_URL + "/email.png"} alt="Email icon"/>
+                    <Dialog dataFromPerson={this.props.item.mail} ></Dialog>
+                </div>
+
                 {
                     (
                         this.props.item.telPoste1 &&
                         <div><img className="icon_phone" src={process.env.PUBLIC_URL + "/phone.png"} alt="Phone icon"/>
-                            <QRTooltip value={'034423' + this.props.item.telPoste1} itemId={'QRphone' + this.props.item.id}></QRTooltip>
+                            <Dialog dataFromPerson={'034423' + this.props.item.telPoste1} ></Dialog>
                         </div>
                     ) ||
                     <div><img className="icon_phone" src={process.env.PUBLIC_URL + "/no_phone.png"} alt="No Phone"/>
