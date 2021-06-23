@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import 'antd/dist/antd.css';
-import { Modal, Button, Tooltip } from 'antd';
+import './PersonList.css';
+import { Modal, Tooltip } from 'antd';
 
 //npm install antd
 
@@ -23,9 +24,7 @@ const Dialog = (props) => {
   return (
     <>
       <Tooltip placement="top" color={'#009fe3'} title="générer un QR Code" arrowPointAtCenter>
-      <Button type="text" style={{ borderColor: 'darkgrey'}} onClick={showModal} ghost>
-        {props.dataFromPerson}
-      </Button>
+      <a class="text_clickable" onClick={showModal}>{props.dataFromPerson}</a>
       </Tooltip>
       <Modal title={props.dataFromPerson} visible={isModalVisible} width={380} footer={null} closable={true} onOk={handleOk} onCancel={handleOk}>
         <img src={`${imgData}`} alt={'QRCode for '+props.dataFromPerson} width="300" height="300" align="center"/>

@@ -47,11 +47,8 @@ export default class PersonCard extends React.Component {
                          alt="No pic available"/>
                 }
                 <h3>{this.props.item.nomp}</h3>
-                <div className="button_email" >
-                    <img className="icon_email" src={process.env.PUBLIC_URL + "/email.png"} alt="Email icon"/>
-                    <Dialog dataFromPerson={this.props.item.mail} ></Dialog>
-                </div>
-
+                <img className="icon_email" src={process.env.PUBLIC_URL + "/email.png"} alt="Email icon"/>
+                <Dialog dataFromPerson={this.props.item.mail} ></Dialog>
                 {
                     (
                         this.props.item.telPoste1 &&

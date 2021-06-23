@@ -7,9 +7,13 @@
   margin-bottom: 10px;
 }
 
-.button_email {
-  margin-top : 6px;
-  margin-bottom: 6px;
+a.text_clickable {
+  text-decoration: none;
+  color: black;
+}
+
+a.text_clickable :hover {
+  color: #009fe3;
 }
 
 .logo {
