@@ -7,6 +7,15 @@
   margin-bottom: 10px;
 }
 
+a.text_clickable {
+  text-decoration: none;
+  color: black;
+}
+
+a.text_clickable :hover {
+  color: #009fe3;
+}
+
 .logo {
   max-width: 200px;
   height: auto;
