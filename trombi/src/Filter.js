@@ -5,7 +5,11 @@ const doFilter = (item, filter) => {
         value = filter.value = new RegExp(value, 'i');
     }
 
-    return value.test(item[ filter.property ]);
+    if (item[filter.property]===null){
+        return false;
+    }
+
+    return value.test(item[filter.property]);
 }
 
 const createFilter = (...filters) => {

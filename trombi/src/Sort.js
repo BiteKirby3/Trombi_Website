@@ -6,15 +6,31 @@ const dirMap = {
 };
 
 const doSort = (A, B, property, direction = 'ASC') => {
-    const a = A[ property ];
-    const b = B[ property ];
 
-    if (a < b) {
-        return dirMap.lt[ direction.toLowerCase() ];
+    if(A[property]!=null && B[property]===null ){
+        return dirMap.lt[direction.toLowerCase()];
     }
-    if (a > b) {
-        return dirMap.gt[ direction.toLowerCase() ];
+
+    if(A[property]===null && B[property]!=null ){
+        return dirMap.gt[direction.toLowerCase()];
     }
+
+    if(A[property]===null && B[property]===null ){
+        return 0;
+    }
+
+    if(A[property]!=null && B[property]!=null ){
+        const a = A[property].toLowerCase();
+        const b = B[property].toLowerCase();
+
+        if (a < b) {
+            return dirMap.lt[direction.toLowerCase()];
+        }
+        if (a > b) {
+            return dirMap.gt[direction.toLowerCase()];
+        }
+    }
+
     return 0;
 }
 
