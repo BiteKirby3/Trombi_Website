@@ -1,0 +1,39 @@
+/** tooltip **/
+.QRtooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 0px dotted black;
+    visibility: visible;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: auto;
+    margin-right: auto;
+    text-decoration: underline;
+    color: #009fe3;
+}
+
+.QRtooltip:hover {
+    color:#ee732c;
+}
+
+.QRtooltip .tooltiptext {
+    visibility: hidden;
+    width: 300px;
+    background-color: darkgrey;
+    color: #fff;
+    text-align: center;
+    border-radius: 10px;
+    padding: 0px 0;
+    position: fixed;
+    z-index: 1;
+    top : 30%;
+    right : 42%;
+    opacity: 1;
+}
+
+
+/*.tooltip:active .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}*/
+
